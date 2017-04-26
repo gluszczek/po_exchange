@@ -76,4 +76,52 @@
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
         android:text="0"/>
+    <TextView
+        android:id="@+id/textViewCinkciarz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textViewInternetowyKantor"
+        android:layout_marginTop="20dp"
+        android:text="Cinkciarz.pl"/>
+    <TextView
+        android:id="@+id/textViewCinkciarzSell"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textViewInternetowyKantorSell"
+        android:layout_marginTop="20dp"
+        android:text="0"/>
+    <TextView
+        android:id="@+id/textViewCinkciarzBuy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewInternetowyKantorBuy"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:text="0"/>
+    <TextView
+        android:id="@+id/textViewTrejdoo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textViewCinkciarz"
+        android:layout_marginTop="20dp"
+        android:text="Trejdoo.pl"/>
+    <TextView
+        android:id="@+id/textViewTrejdooSell"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textViewCinkciarzSell"
+        android:layout_marginTop="20dp"
+        android:text="0"/>
+    <TextView
+        android:id="@+id/textViewTrejdooBuy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewCinkciarzBuy"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:text="0"/>
 </RelativeLayout>
