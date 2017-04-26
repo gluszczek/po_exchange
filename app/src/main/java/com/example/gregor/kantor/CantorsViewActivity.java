@@ -19,6 +19,8 @@ public class CantorsViewActivity extends AppCompatActivity {
     private TextView textViewCinkciarzSell;
     private TextView textViewTrejdooBuy;
     private TextView textViewTrejdooSell;
+    private TextView textViewLiderBuy;
+    private TextView textViewLiderSell;
     private Spinner spinnerCurrency;
     private InternetowyKantor internetowyKantor;
     private ArrayList<OnlineExchangeOffice> offices;
@@ -37,10 +39,11 @@ public class CantorsViewActivity extends AppCompatActivity {
         textViewCinkciarzSell = (TextView)findViewById(R.id.textViewCinkciarzSell);
         textViewTrejdooBuy = (TextView)findViewById(R.id.textViewTrejdooBuy);
         textViewTrejdooSell = (TextView)findViewById(R.id.textViewTrejdooSell);
+        textViewLiderBuy = (TextView)findViewById(R.id.textViewLiderBuy);
+        textViewLiderSell = (TextView)findViewById(R.id.textViewLiderSell);
         spinnerCurrency = (Spinner) findViewById(R.id.spinnerCurrency);
         setCurrencySpinner();
 
-        internetowyKantor = new InternetowyKantor(getApplicationContext());
         loadExchanges();
     }
 
@@ -53,18 +56,19 @@ public class CantorsViewActivity extends AppCompatActivity {
         }
     };
 
-    private void showExchanges(String currency){
-        //loadInternetowyKantor(currency);
-        showInternetowyKantor(currency);
-        showCinkciarz(currency);
-        showTrejdoo(currency);
-    }
-
     private void loadExchanges(){
         offices = new ArrayList<>();
         loadInternetowyKantor();
         loadCinkciarz();
         loadTrejdoo();
+        loadLiderWalut();
+    }
+
+    private void showExchanges(String currency){
+        //showInternetowyKantor(currency);
+        //showCinkciarz(currency);
+        showTrejdoo(currency);
+        showLiderWalut(currency);
     }
 
     private void setCurrencySpinner(){
@@ -79,11 +83,11 @@ public class CantorsViewActivity extends AppCompatActivity {
         spinnerCurrency.setAdapter(adapter);
     }
 
-    private void XloadInternetowyKantor(String currency){
-        internetowyKantor.search(currency);
-        textViewInternetowyBuy.setText(internetowyKantor.searchBuyValue());
-        textViewInternetowySell.setText(internetowyKantor.searchSellValue());
-    }
+//    private void XloadInternetowyKantor(String currency){
+//        internetowyKantor.search(currency);
+//        textViewInternetowyBuy.setText(internetowyKantor.searchBuyValue());
+//        textViewInternetowySell.setText(internetowyKantor.searchSellValue());
+//    }
 
     private void loadInternetowyKantor(){
         String regexSell = "kurs kurs_sprzedazy.*[0-9],[0-9]{4}.*kurs kurs_kupna.*([0-9],[0-9]{4})";
@@ -124,7 +128,7 @@ public class CantorsViewActivity extends AppCompatActivity {
     }
 
     private void loadTrejdoo(){
-        String regexSell = "Sprzedaż.*\\n.*\\n.*[0-9],[0-9]{4}.*\\n.*\\n.*\\n.*\\n.*Kupno.*\\n.*\\n.*([0-9],[0-9]{4})";
+        String regexSell = "Sprzedaż.*(?:\\n.*)*[0-9],[0-9]{4}.*\\n.*\\n.*\\n.*\\n.*Kupno.*\\n.*\\n.*([0-9],[0-9]{4})";
         String regexBuy = "Sprzedaż.*\\n.*\\n.*([0-9],[0-9]{4}).*\\n.*\\n.*\\n.*\\n.*Kupno.*\\n.*\\n.*[0-9],[0-9]{4}";
         ArrayList<String> urls = new ArrayList<>();
         urls.add("http://www.trejdoo.com/analizy/kursy-walut/eur-pln/");
@@ -140,5 +144,26 @@ public class CantorsViewActivity extends AppCompatActivity {
         office.search(currency);
         textViewTrejdooBuy.setText(office.getBuyValue());
         textViewTrejdooSell.setText(office.getSellValue());
+    }
+
+    private void loadLiderWalut(){
+        String regexSell = "ask\".*([0-9].[0-9]{4})<\\/span>";
+        //String regexSell = "Kurs zakupu.*(?:\\n.*)*[0-9].[0-9]{4}.*(?:\\n.*)*Kurs sprzedaży.*(?:\\n.*)*([0-9].[0-9]{4})";
+        String regexBuy = "bid\".*([0-9].[0-9]{4})<\\/span>";
+        //String regexBuy = "Kurs zakupu.*\\n.*\\n.*\\n.*\\n.*\\n.*[0-9]\\.[0-9]{4}.*\\n.*\\n.*\\n.*\\n.*\\n.*\\n.*\\n.*\\n.*\\n.*\\n.*Kurs sprzed.*\\n.*\\n.*\\n.*\\n.*\\n.*([0-9]\\.[0-9]{4})";
+        ArrayList<String> urls = new ArrayList<>();
+        urls.add("https://liderwalut.pl/kursy-walut/kurs-euro");
+        urls.add("https://liderwalut.pl/kursy-walut/kurs-dolara");
+        urls.add("https://liderwalut.pl/kursy-walut/kurs-funta");
+        urls.add("https://liderwalut.pl/kursy-walut/kurs-franka");
+        OnlineExchangeOffice office = new OnlineExchangeOffice(getApplicationContext(), regexBuy, regexSell, urls);
+        offices.add(office);
+    }
+
+    private void showLiderWalut(String currency){
+        OnlineExchangeOffice office = offices.get(3);
+        office.search(currency);
+        textViewLiderBuy.setText(office.getBuyValue());
+        textViewLiderSell.setText(office.getSellValue());
     }
 }

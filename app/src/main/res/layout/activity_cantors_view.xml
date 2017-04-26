@@ -124,4 +124,28 @@
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
         android:text="0"/>
+    <TextView
+        android:id="@+id/textViewLider"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textViewTrejdoo"
+        android:layout_marginTop="20dp"
+        android:text="LiderWalut.pl"/>
+    <TextView
+        android:id="@+id/textViewLiderSell"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textViewTrejdooSell"
+        android:layout_marginTop="20dp"
+        android:text="0"/>
+    <TextView
+        android:id="@+id/textViewLiderBuy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewTrejdooBuy"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:text="0"/>
 </RelativeLayout>
