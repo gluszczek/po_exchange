@@ -27,7 +27,6 @@ public class InternetowyKantor {
             case "USD":
                 htmlSource = "https://internetowykantor.pl/kurs-dolara/";
                 break;
-
             case "GBP":
                 htmlSource = "https://internetowykantor.pl/kurs-funta/";
                 break;
