@@ -65,8 +65,8 @@ public class CantorsViewActivity extends AppCompatActivity {
     }
 
     private void showExchanges(String currency){
-        //showInternetowyKantor(currency);
-        //showCinkciarz(currency);
+        showInternetowyKantor(currency);
+        showCinkciarz(currency);
         showTrejdoo(currency);
         showLiderWalut(currency);
     }

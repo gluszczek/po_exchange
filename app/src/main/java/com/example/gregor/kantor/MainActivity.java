@@ -20,6 +20,9 @@ public class MainActivity extends AppCompatActivity {
     public static final String DATA_PATH = Environment
             .getExternalStorageDirectory().toString() + "/Kantor/";
     protected Button buttonCompareCantors;
+    protected Button buttonCurrencySearch;
+    protected Button buttonHistory;
+    protected Button buttonSettings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +39,18 @@ public class MainActivity extends AppCompatActivity {
 
         buttonCompareCantors = (Button)findViewById(R.id.buttonCompareCantors);
         buttonCompareCantors.setOnClickListener(buttonCompareCantorsListener);
-    }
 
+        buttonCurrencySearch = (Button)findViewById(R.id.buttonCurrencySearch);
+        buttonCurrencySearch.setOnClickListener(buttonCurrencySearchListener);
+
+        buttonHistory = (Button)findViewById(R.id.buttonHistory);
+        buttonHistory.setOnClickListener(buttonHistoryListener);
+
+        buttonSettings = (Button)findViewById(R.id.buttonSettings);
+        buttonSettings.setOnClickListener(buttonSettingsListener);
+
+    }
+    // Menu buttons click handling
     private View.OnClickListener buttonCompareCantorsListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -45,6 +58,30 @@ public class MainActivity extends AppCompatActivity {
             startActivity(cantorsViewIntent);
         }
     };
+
+    private View.OnClickListener buttonCurrencySearchListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+        }
+    };
+
+    private View.OnClickListener buttonHistoryListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+        }
+    };
+
+    private View.OnClickListener buttonSettingsListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent settingsViewIntent = new Intent(v.getContext(), SettingsActivity.class);
+            startActivity(settingsViewIntent);
+        }
+    };
+
+
 
     public void askForPermission(){
         ActivityCompat.requestPermissions(MainActivity.this,
