@@ -1,14 +1,19 @@
 package com.example.gregor.kantor;
 
-import android.support.v7.app.AppCompatActivity;
+import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
-
 import java.util.ArrayList;
+
+import static java.lang.Thread.sleep;
 
 public class CantorsViewActivity extends AppCompatActivity {
 
@@ -21,9 +26,14 @@ public class CantorsViewActivity extends AppCompatActivity {
     private TextView textViewTrejdooSell;
     private TextView textViewLiderBuy;
     private TextView textViewLiderSell;
+    private TextView textViewDobryBuy;
+    private TextView textViewDobrySell;
+    private TextView textViewKantorPlBuy;
+    private TextView textViewKantorPlSell;
     private Spinner spinnerCurrency;
-    private InternetowyKantor internetowyKantor;
     private ArrayList<OnlineExchangeOffice> offices;
+    private ProgressDialog progressDialog;
+    private Handler progressHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,20 +51,83 @@ public class CantorsViewActivity extends AppCompatActivity {
         textViewTrejdooSell = (TextView)findViewById(R.id.textViewTrejdooSell);
         textViewLiderBuy = (TextView)findViewById(R.id.textViewLiderBuy);
         textViewLiderSell = (TextView)findViewById(R.id.textViewLiderSell);
+        textViewDobryBuy = (TextView)findViewById(R.id.textViewDobryBuy);
+        textViewDobrySell = (TextView)findViewById(R.id.textViewDobrySell);
+        textViewKantorPlBuy = (TextView)findViewById(R.id.textViewKantorPlBuy);
+        textViewKantorPlSell = (TextView)findViewById(R.id.textViewKantorPlSell);
         spinnerCurrency = (Spinner) findViewById(R.id.spinnerCurrency);
         setCurrencySpinner();
-
+        setProgressHandler();
         loadExchanges();
     }
 
     private View.OnClickListener buttonDisplayListener = new View.OnClickListener(){
-
         @Override
         public void onClick(View v) {
-            //Log.v("KANTOR", spinnerCurrency.toString());
-        showExchanges(spinnerCurrency.getSelectedItem().toString());
+            progressDialog= ProgressDialog.show(CantorsViewActivity.this, "",
+                "Wczytywanie, proszę czekać...", true);
+            resetValues();
+            downloadExchangesHTML(spinnerCurrency.getSelectedItem().toString());
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    while (!isLoaded()) {
+                        try {
+                            sleep(1000);
+                            searchExchangesValues();
+                        } catch(Exception e) {
+                            Log.e("threadmessage",e.getMessage());
+                        }
+                    }
+                    progressHandler.sendEmptyMessage(0);
+                }
+            }).start();
         }
     };
+
+    private void setProgressHandler(){
+        progressHandler = new Handler() {
+            @Override
+            public void handleMessage(Message msg){
+                showExchanges();
+                progressDialog.dismiss();
+            }
+        };
+    }
+
+    private boolean isLoaded(){
+        for (OnlineExchangeOffice office :
+                offices) {
+            Log.e(office.getName()+": ", "Sell:" + Double.toString(office.getSellValue())+" Buy:"+Double.toString(office.getBuyValue()));
+            if (office.getBuyValue()==-1 || office.getSellValue()==-1) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private void resetValues(){
+        Log.e("OFFICES SIZE: ", Integer.toString(offices.size()));
+        for (OnlineExchangeOffice office :
+                offices) {
+            office.resetValues();
+        }
+    }
+
+    private void downloadExchangesHTML(String currency){
+        for (OnlineExchangeOffice office :
+                offices) {
+            office.search(currency);
+        }
+    }
+
+    private void searchExchangesValues(){
+        for (OnlineExchangeOffice office :
+                offices) {
+            office.loadBuyValue();
+            office.loadSellValue();
+        }
+    }
 
     private void loadExchanges(){
         offices = new ArrayList<>();
@@ -62,13 +135,17 @@ public class CantorsViewActivity extends AppCompatActivity {
         loadCinkciarz();
         loadTrejdoo();
         loadLiderWalut();
+        loadDobryKantor();
+        loadKantorPl();
     }
 
-    private void showExchanges(String currency){
-        showInternetowyKantor(currency);
-        showCinkciarz(currency);
-        showTrejdoo(currency);
-        showLiderWalut(currency);
+    private void showExchanges(){
+        showInternetowyKantor();
+        showCinkciarz();
+        showTrejdoo();
+        showLiderWalut();
+        showDobryKantor();
+        showKantorPl();
     }
 
     private void setCurrencySpinner(){
@@ -83,12 +160,6 @@ public class CantorsViewActivity extends AppCompatActivity {
         spinnerCurrency.setAdapter(adapter);
     }
 
-//    private void XloadInternetowyKantor(String currency){
-//        internetowyKantor.search(currency);
-//        textViewInternetowyBuy.setText(internetowyKantor.searchBuyValue());
-//        textViewInternetowySell.setText(internetowyKantor.searchSellValue());
-//    }
-
     private void loadInternetowyKantor(){
         String regexSell = "kurs kurs_sprzedazy.*[0-9],[0-9]{4}.*kurs kurs_kupna.*([0-9],[0-9]{4})";
         String regexBuy = "kurs kurs_sprzedazy.*([0-9],[0-9]{4}).*kurs kurs_kupna.*[0-9],[0-9]{4}";
@@ -97,15 +168,19 @@ public class CantorsViewActivity extends AppCompatActivity {
         urls.add("https://internetowykantor.pl/kurs-dolara/");
         urls.add("https://internetowykantor.pl/kurs-funta/");
         urls.add("https://internetowykantor.pl/kurs-franka/");
-        OnlineExchangeOffice office = new OnlineExchangeOffice(getApplicationContext(), regexBuy, regexSell, urls);
+        OnlineExchangeOffice office = new OnlineExchangeOffice(getApplicationContext(), "InternetowyKantor.pl", regexBuy, regexSell, urls);
         offices.add(office);
     }
 
-    private void showInternetowyKantor(String currency){
-        OnlineExchangeOffice office = offices.get(0);
-        office.search(currency);
-        textViewInternetowyBuy.setText(office.getBuyValue());
-        textViewInternetowySell.setText(office.getSellValue());
+    private void showInternetowyKantor(){
+        for (OnlineExchangeOffice office :
+                offices) {
+            if(office.getName().equals("InternetowyKantor.pl")){
+                textViewInternetowyBuy.setText(Double.toString(office.getBuyValue()));
+                textViewInternetowySell.setText(Double.toString(office.getSellValue()));
+                return;
+            }
+        }
     }
 
     private void loadCinkciarz(){
@@ -116,15 +191,19 @@ public class CantorsViewActivity extends AppCompatActivity {
         urls.add("https://cinkciarz.pl/kantor/kursy-walut-cinkciarz-pl/usd");
         urls.add("https://cinkciarz.pl/kantor/kursy-walut-cinkciarz-pl/gbp");
         urls.add("https://cinkciarz.pl/kantor/kursy-walut-cinkciarz-pl/chf");
-        OnlineExchangeOffice office = new OnlineExchangeOffice(getApplicationContext(), regexBuy, regexSell, urls);
+        OnlineExchangeOffice office = new OnlineExchangeOffice(getApplicationContext(), "Cinkciarz.pl", regexBuy, regexSell, urls);
         offices.add(office);
     }
 
-    private void showCinkciarz(String currency){
-        OnlineExchangeOffice office = offices.get(1);
-        office.search(currency);
-        textViewCinkciarzBuy.setText(office.getBuyValue());
-        textViewCinkciarzSell.setText(office.getSellValue());
+    private void showCinkciarz(){
+        for (OnlineExchangeOffice office :
+                offices) {
+            if(office.getName().equals("Cinkciarz.pl")){
+                textViewCinkciarzBuy.setText(Double.toString(office.getBuyValue()));
+                textViewCinkciarzSell.setText(Double.toString(office.getSellValue()));
+                return;
+            }
+        }
     }
 
     private void loadTrejdoo(){
@@ -135,15 +214,19 @@ public class CantorsViewActivity extends AppCompatActivity {
         urls.add("http://www.trejdoo.com/analizy/kursy-walut/usd-pln/");
         urls.add("http://www.trejdoo.com/analizy/kursy-walut/gbp-pln/");
         urls.add("http://www.trejdoo.com/analizy/kursy-walut/chf-pln/");
-        OnlineExchangeOffice office = new OnlineExchangeOffice(getApplicationContext(), regexBuy, regexSell, urls);
+        OnlineExchangeOffice office = new OnlineExchangeOffice(getApplicationContext(), "Trejdoo.pl", regexBuy, regexSell, urls);
         offices.add(office);
     }
 
-    private void showTrejdoo(String currency){
-        OnlineExchangeOffice office = offices.get(2);
-        office.search(currency);
-        textViewTrejdooBuy.setText(office.getBuyValue());
-        textViewTrejdooSell.setText(office.getSellValue());
+    private void showTrejdoo(){
+        for (OnlineExchangeOffice office :
+                offices) {
+            if(office.getName().equals("Trejdoo.pl")){
+                textViewTrejdooBuy.setText(Double.toString(office.getBuyValue()));
+                textViewTrejdooSell.setText(Double.toString(office.getSellValue()));
+                return;
+            }
+        }
     }
 
     private void loadLiderWalut(){
@@ -156,14 +239,66 @@ public class CantorsViewActivity extends AppCompatActivity {
         urls.add("https://liderwalut.pl/kursy-walut/kurs-dolara");
         urls.add("https://liderwalut.pl/kursy-walut/kurs-funta");
         urls.add("https://liderwalut.pl/kursy-walut/kurs-franka");
-        OnlineExchangeOffice office = new OnlineExchangeOffice(getApplicationContext(), regexBuy, regexSell, urls);
+        OnlineExchangeOffice office = new OnlineExchangeOffice(getApplicationContext(), "LiderWalut.pl", regexBuy, regexSell, urls);
         offices.add(office);
     }
 
-    private void showLiderWalut(String currency){
-        OnlineExchangeOffice office = offices.get(3);
-        office.search(currency);
-        textViewLiderBuy.setText(office.getBuyValue());
-        textViewLiderSell.setText(office.getSellValue());
+    private void showLiderWalut(){
+        for (OnlineExchangeOffice office :
+                offices) {
+            if(office.getName().equals("LiderWalut.pl")){
+                textViewLiderBuy.setText(Double.toString(office.getBuyValue()));
+                textViewLiderSell.setText(Double.toString(office.getSellValue()));
+                return;
+            }
+        }
+    }
+
+    private void loadDobryKantor(){
+        String regexSell = "Sprzedaj.*Kup.*[0-9].[0-9]{4}.*([0-9].[0-9]{4})";
+        String regexBuy = "Sprzedaj.*Kup.*([0-9].[0-9]{4}).*[0-9].[0-9]{4}";
+        ArrayList<String> urls = new ArrayList<>();
+        urls.add("https://www.dobrykantor.pl/kurs-euro.html");
+        urls.add("https://www.dobrykantor.pl/kurs-usd.html");
+        urls.add("https://www.dobrykantor.pl/kurs-gbp.html");
+        urls.add("https://www.dobrykantor.pl/kurs-chf.html");
+        OnlineExchangeOffice office = new OnlineExchangeOffice(getApplicationContext(), "DobryKantor.pl", regexBuy, regexSell, urls);
+        offices.add(office);
+    }
+
+    private void showDobryKantor(){
+        for (OnlineExchangeOffice office :
+                offices) {
+            if(office.getName().equals("DobryKantor.pl")){
+                textViewDobryBuy.setText(Double.toString(office.getBuyValue()));
+                textViewDobrySell.setText(Double.toString(office.getSellValue()));
+                return;
+            }
+        }
+    }
+
+    private void loadKantorPl(){
+        //String regexSell = "Kurs.*w Kantor.pl.*\\n.*\\n.*\\n.*\\n.*\\n.*\\n.*\\n.*\\n.*[0-9].[0-9]{4}.*\\n.*([0-9].[0-9]{4})";
+        String regexSell = "cer-5.*([0-9].[0-9]{4})";
+        //String regexBuy = "Kurs.*w Kantor.pl.*(?:\\n.*){8}[0-9].[0-9]{4}.*\\n.*([0-9].[0-9]{4})";
+        String regexBuy = "cer-4.*([0-9].[0-9]{4})";
+        ArrayList<String> urls = new ArrayList<>();
+        urls.add("http://www.kantor.pl/euro-kurs-waluty");
+        urls.add("http://www.kantor.pl/dolar-amerykanski-kurs-waluty");
+        urls.add("http://www.kantor.pl/funt-brytyjski-kurs-waluty");
+        urls.add("http://www.kantor.pl/frank-szwajcarski-kurs-waluty");
+        OnlineExchangeOffice office = new OnlineExchangeOffice(getApplicationContext(), "Kantor.pl", regexBuy, regexSell, urls);
+        offices.add(office);
+    }
+
+    private void showKantorPl(){
+        for (OnlineExchangeOffice office :
+                offices) {
+            if(office.getName().equals("Kantor.pl")){
+                textViewKantorPlBuy.setText(Double.toString(office.getBuyValue()));
+                textViewKantorPlSell.setText(Double.toString(office.getSellValue()));
+                return;
+            }
+        }
     }
 }
