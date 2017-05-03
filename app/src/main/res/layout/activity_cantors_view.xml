@@ -149,4 +149,52 @@
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
         android:text="0"/>
+    <TextView
+        android:id="@+id/textViewDobry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textViewLider"
+        android:layout_marginTop="20dp"
+        android:text="DobryKantor.pl"/>
+    <TextView
+        android:id="@+id/textViewDobrySell"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textViewLiderSell"
+        android:layout_marginTop="20dp"
+        android:text="0"/>
+    <TextView
+        android:id="@+id/textViewDobryBuy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewLiderBuy"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:text="0"/>
+    <TextView
+        android:id="@+id/textViewKantorPl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textViewDobry"
+        android:layout_marginTop="20dp"
+        android:text="Kantor.pl"/>
+    <TextView
+        android:id="@+id/textViewKantorPlSell"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textViewDobrySell"
+        android:layout_marginTop="20dp"
+        android:text="0"/>
+    <TextView
+        android:id="@+id/textViewKantorPlBuy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewDobryBuy"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:text="0"/>
 </RelativeLayout>
