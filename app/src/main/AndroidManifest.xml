@@ -21,7 +21,8 @@
         </activity>
         <activity android:name=".CantorsViewActivity" />
         <activity android:name=".SettingsActivity" />
-        <activity android:name=".NBPActivity"></activity>
+        <activity android:name=".NBPActivity" />
+        <activity android:name=".SellBuyActivity"></activity>
     </application>
 
 </manifest>

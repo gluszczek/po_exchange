@@ -80,6 +80,34 @@ public class ParserXml {
                         }
                     }
 
+                    URL urlConnection2 = new URL("http://www.nbp.pl/kursy/xml/LastC.xml");
+                    DocumentBuilderFactory dbf2 = DocumentBuilderFactory.newInstance();
+                    DocumentBuilder db2 = dbf2.newDocumentBuilder();
+                    Document doc2;
+                    doc2 = db2.parse(new InputSource(urlConnection2.openStream()));
+                    doc2.getDocumentElement().normalize();
+
+                    NodeList nList2 = doc2.getElementsByTagName("pozycja");
+
+                    for (int temp = 0; temp < nList2.getLength(); temp++) {
+
+                        Node nNode = nList2.item(temp);
+
+                        if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+
+                            Element eElement = (Element) nNode;
+                            for(int i = 0; i < currencyList.size();i++) {
+                                if (eElement.getElementsByTagName("nazwa_waluty").item(0).getTextContent().equals(currencyList.get(i).getCurrencyName())) {
+                                    String buy = eElement.getElementsByTagName("kurs_kupna").item(0).getTextContent().replaceFirst(",", ".");
+                                    String sell = eElement.getElementsByTagName("kurs_sprzedazy").item(0).getTextContent().replaceFirst(",", ".");
+                                    currencyList.get(i).setBuyRate(buy);
+                                    currencyList.get(i).setSellRate(sell);
+                                }
+
+                            }
+                        }
+                    }
+
                 } catch (ParserConfigurationException e) {
                     e.printStackTrace();
                 } catch (SAXException e) {

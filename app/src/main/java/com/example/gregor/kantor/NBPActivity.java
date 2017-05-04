@@ -17,6 +17,8 @@ public class NBPActivity extends AppCompatActivity {
     private TextView scaler;
     private TextView currencyCode;
     private TextView avgCurrency;
+    private TextView buyCurrency;
+    private TextView sellCurrency;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,8 @@ public class NBPActivity extends AppCompatActivity {
         scaler = (TextView)findViewById(R.id.scaler);
         currencyCode = (TextView)findViewById(R.id.currencyCode);
         avgCurrency = (TextView)findViewById(R.id.avgCurrency);
+        buyCurrency = (TextView)findViewById(R.id.buyNBP);
+        sellCurrency = (TextView)findViewById(R.id.sellNBP);
 
         spinnerCurrency = (Spinner) findViewById(R.id.spinnerCurrency);
         setCurrencySpinner();
@@ -51,6 +55,8 @@ public class NBPActivity extends AppCompatActivity {
             scaler.setText(c.getScaler());
             currencyCode.setText(c.getCurrencyCode());
             avgCurrency.setText(c.getExchangeRate());
+            buyCurrency.setText(c.getBuyRate());
+            sellCurrency.setText(c.getSellRate());
         }
 
     };
@@ -100,4 +106,5 @@ public class NBPActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCurrency.setAdapter(adapter);
     }
+
 }

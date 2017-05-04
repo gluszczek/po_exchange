@@ -110,4 +110,42 @@
         android:layout_alignTop="@+id/textView11"
         android:text="TextView" />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView11"
+        android:layout_marginTop="28dp"
+        android:text="Kupno:" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView"
+        android:layout_marginTop="31dp"
+        android:text="Sprzedaż:" />
+
+    <TextView
+        android:id="@+id/buyNBP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textView2"
+        android:layout_alignEnd="@+id/avgCurrency"
+        android:layout_alignRight="@+id/avgCurrency"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/sellNBP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignEnd="@+id/buyNBP"
+        android:layout_alignRight="@+id/buyNBP"
+        android:text="TextView" />
+
 </RelativeLayout>

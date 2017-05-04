@@ -9,12 +9,38 @@ public class Currency {
     int scaler;
     String currencyCode;
     Float exchangeRate;
+    Float buyRate;
+    Float sellRate;
+
+    public String getBuyRate() {
+        if(buyRate == null){
+            return "null";
+        }
+        return buyRate.toString();
+    }
+
+    public String getSellRate() {
+        if(sellRate == null){
+            return "null";
+        }
+        return sellRate.toString();
+    }
+
+    public void setSellRate(String sellRate) {
+        this.sellRate = Float.parseFloat(sellRate);
+    }
+
+    public void setBuyRate(String buyRate) {
+        this.buyRate = Float.parseFloat(buyRate);
+    }
 
     Currency(String currencyName, String scaler, String currencyCode, String exchangeRate){
         this.currencyName = currencyName;
         this.scaler = Integer.parseInt(scaler);
         this.currencyCode = currencyCode;
         this.exchangeRate = Float.parseFloat(exchangeRate);
+        this.buyRate = null;
+        this.sellRate = null;
     }
 
     public String toString(){
