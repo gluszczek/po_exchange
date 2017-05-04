@@ -4,13 +4,15 @@
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+   >
+
     <TextView
         android:id="@+id/textViewChooseCurrency"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="40dp"
         android:layout_centerHorizontal="true"
         android:text="Waluta"/>
     <Button
@@ -18,183 +20,31 @@
         android:text="Wyświetl"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_below="@+id/spinnerCurrency"
-        android:layout_marginTop="10dp"/>
+        android:layout_below="@+id/textViewChooseCurrency"
+        android:layout_marginTop="15dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Spinner
         android:id="@+id/spinnerCurrency"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/buttonCompareCantors"
-        android:layout_centerHorizontal="true" />
-    <TextView
-        android:id="@+id/textViewCantorName"
-        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"/>
+    <include
+        android:id="@+id/descryption"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        layout="@layout/row_cantors_view"
         android:layout_below="@+id/buttonDisplay"
-        android:layout_marginTop="10dp"
-        android:text="Kantor"/>
+        android:layout_marginTop="15dp"/>
 
-    <TextView
-        android:id="@+id/textViewSellValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/buttonDisplay"
-        android:layout_marginTop="10dp"
-        android:text="Sprzedaż"/>
-    <TextView
-        android:id="@+id/textViewBuyValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/buttonDisplay"
-        android:layout_marginTop="10dp"
-        android:layout_centerHorizontal="true"
-        android:text="Kupno"/>
-    <TextView
-        android:id="@+id/textViewInternetowyKantor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textViewCantorName"
-        android:layout_marginTop="20dp"
-        android:text="InternetowyKantor.pl"/>
-    <TextView
-        android:id="@+id/textViewInternetowyKantorSell"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/textViewSellValue"
-        android:layout_marginTop="20dp"
-        android:text="0"/>
-    <TextView
-        android:id="@+id/textViewInternetowyKantorBuy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textViewBuyValue"
-        android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true"
-        android:text="0"/>
-    <TextView
-        android:id="@+id/textViewCinkciarz"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textViewInternetowyKantor"
-        android:layout_marginTop="20dp"
-        android:text="Cinkciarz.pl"/>
-    <TextView
-        android:id="@+id/textViewCinkciarzSell"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/textViewInternetowyKantorSell"
-        android:layout_marginTop="20dp"
-        android:text="0"/>
-    <TextView
-        android:id="@+id/textViewCinkciarzBuy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textViewInternetowyKantorBuy"
-        android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true"
-        android:text="0"/>
-    <TextView
-        android:id="@+id/textViewTrejdoo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textViewCinkciarz"
-        android:layout_marginTop="20dp"
-        android:text="Trejdoo.pl"/>
-    <TextView
-        android:id="@+id/textViewTrejdooSell"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/textViewCinkciarzSell"
-        android:layout_marginTop="20dp"
-        android:text="0"/>
-    <TextView
-        android:id="@+id/textViewTrejdooBuy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textViewCinkciarzBuy"
-        android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true"
-        android:text="0"/>
-    <TextView
-        android:id="@+id/textViewLider"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textViewTrejdoo"
-        android:layout_marginTop="20dp"
-        android:text="LiderWalut.pl"/>
-    <TextView
-        android:id="@+id/textViewLiderSell"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/textViewTrejdooSell"
-        android:layout_marginTop="20dp"
-        android:text="0"/>
-    <TextView
-        android:id="@+id/textViewLiderBuy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textViewTrejdooBuy"
-        android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true"
-        android:text="0"/>
-    <TextView
-        android:id="@+id/textViewDobry"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textViewLider"
-        android:layout_marginTop="20dp"
-        android:text="DobryKantor.pl"/>
-    <TextView
-        android:id="@+id/textViewDobrySell"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/textViewLiderSell"
-        android:layout_marginTop="20dp"
-        android:text="0"/>
-    <TextView
-        android:id="@+id/textViewDobryBuy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textViewLiderBuy"
-        android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true"
-        android:text="0"/>
-    <TextView
-        android:id="@+id/textViewKantorPl"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textViewDobry"
-        android:layout_marginTop="20dp"
-        android:text="Kantor.pl"/>
-    <TextView
-        android:id="@+id/textViewKantorPlSell"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/textViewDobrySell"
-        android:layout_marginTop="20dp"
-        android:text="0"/>
-    <TextView
-        android:id="@+id/textViewKantorPlBuy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textViewDobryBuy"
-        android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true"
-        android:text="0"/>
+    <ListView
+        android:id="@+id/listExchangeOffice"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_below="@+id/descryption"
+        android:layout_marginTop="15dp">
+    </ListView>
 </RelativeLayout>
