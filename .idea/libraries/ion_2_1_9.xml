@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="ion-2.1.9">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.android/build-cache/6cd78483118626ca2ff734e89cd328f4629da916/output/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.android/build-cache/6cd78483118626ca2ff734e89cd328f4629da916/output/res" />
+      <root url="file://$USER_HOME$/.android/build-cache/a7d616bb36c629665ff969c341af907703916b93/output/res" />
+      <root url="jar://$USER_HOME$/.android/build-cache/a7d616bb36c629665ff969c341af907703916b93/output/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

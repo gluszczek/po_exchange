@@ -24,8 +24,8 @@ public class MainActivity extends AppCompatActivity {
     protected Button buttonHistory;
     protected Button buttonSettings;
 
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -70,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
     private View.OnClickListener buttonHistoryListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            Intent historyIntent = new Intent(v.getContext(), HistoryActivity.class);
+            startActivity(historyIntent);
 
         }
     };
