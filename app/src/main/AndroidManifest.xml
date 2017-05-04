@@ -19,8 +19,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CantorsViewActivity"></activity>
-        <activity android:name=".SettingsActivity"></activity>
+        <activity android:name=".CantorsViewActivity" />
+        <activity android:name=".SettingsActivity" />
+        <activity android:name=".NBPActivity"></activity>
     </application>
 
 </manifest>

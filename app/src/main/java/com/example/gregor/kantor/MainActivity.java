@@ -62,7 +62,8 @@ public class MainActivity extends AppCompatActivity {
     private View.OnClickListener buttonCurrencySearchListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-
+            Intent currencySearchListener = new Intent(v.getContext(), NBPActivity.class);
+            startActivity(currencySearchListener);
         }
     };
 
