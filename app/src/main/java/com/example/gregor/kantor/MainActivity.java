@@ -62,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
     private View.OnClickListener buttonCurrencySearchListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            Intent currencySearchListener = new Intent(v.getContext(), NBPActivity.class);
+            startActivity(currencySearchListener);
 
         }
     };
@@ -69,7 +71,8 @@ public class MainActivity extends AppCompatActivity {
     private View.OnClickListener buttonHistoryListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-
+            Intent historyViewIntent = new Intent(v.getContext(), HistoryActivity.class);
+            startActivity(historyViewIntent);
         }
     };
 

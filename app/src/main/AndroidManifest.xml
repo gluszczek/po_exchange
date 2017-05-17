@@ -21,6 +21,8 @@
         </activity>
         <activity android:name=".CantorsViewActivity"></activity>
         <activity android:name=".SettingsActivity"></activity>
+        <activity android:name=".HistoryActivity"></activity>
+        <activity android:name=".NBPActivity"></activity>
     </application>
 
 </manifest>
