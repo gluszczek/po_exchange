@@ -5,23 +5,21 @@
     android:paddingRight="20dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
     <TextView
         android:id="@+id/textViewChooseCurrency"
-        android:layout_width="wrap_content"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginTop="10dp"
-        android:layout_centerHorizontal="true"
-        android:text="Waluta"/>
-    <Button
-        android:id="@+id/buttonDisplay"
-        android:text="Wyświetl"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="27dp"
-        android:layout_below="@+id/spinnerCurrency"
+        android:gravity="left"
+        android:text="Waluta"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
 
     <Spinner
         android:id="@+id/spinnerCurrency"
@@ -30,9 +28,11 @@
         android:layout_below="@+id/textViewChooseCurrency"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="5dp"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:popupBackground="@color/black"
+        />
 
     <TextView
         android:id="@+id/textView5"
@@ -40,8 +40,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/buttonDisplay"
-        android:layout_marginTop="65dp"
+        android:layout_below="@+id/spinnerCurrency"
+        android:layout_marginTop="15dp"
         android:text="Nazwa waluty:" />
 
     <TextView
@@ -49,103 +49,104 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/textView5"
-        android:layout_toEndOf="@+id/textViewChooseCurrency"
-        android:layout_toRightOf="@+id/textViewChooseCurrency"
-        android:text="TextView" />
+        android:text="TextView"
+        android:gravity="center"
+        android:layout_marginLeft="10dp"/>
 
     <TextView
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView5"
-        android:layout_marginTop="37dp"
+        android:layout_below="@+id/currencyName"
+        android:layout_marginTop="5dp"
         android:text="Przelicznik: " />
 
     <TextView
         android:id="@+id/scaler"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/currencyName"
-        android:layout_alignStart="@+id/currencyName"
-        android:layout_alignTop="@+id/textView7"
-        android:text="TextView" />
+        android:layout_below="@+id/textView7"
+        android:text="TextView"
+        android:gravity="center"
+        android:layout_marginLeft="10dp"/>
 
     <TextView
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView7"
-        android:layout_marginTop="34dp"
+        android:layout_below="@+id/scaler"
+        android:layout_marginTop="5dp"
         android:text="Kod waluty: " />
 
     <TextView
         android:id="@+id/currencyCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView9"
-        android:layout_alignLeft="@+id/scaler"
-        android:layout_alignStart="@+id/scaler"
-        android:text="TextView" />
+        android:layout_below="@+id/textView9"
+        android:text="TextView"
+        android:gravity="center"
+        android:layout_marginLeft="10dp"/>
 
     <TextView
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView9"
-        android:layout_marginTop="44dp"
-        android:text="Średnia wartość waluty:" />
+        android:layout_below="@+id/currencyCode"
+        android:layout_marginTop="5dp"
+        android:text="Śr. wart. waluty:" />
 
     <TextView
         android:id="@+id/avgCurrency"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/currencyCode"
-        android:layout_alignRight="@+id/currencyCode"
-        android:layout_alignTop="@+id/textView11"
-        android:text="TextView" />
+        android:layout_below="@+id/textView11"
+        android:text="TextView"
+        android:gravity="center"
+        android:layout_marginLeft="10dp"/>
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView11"
-        android:layout_marginTop="28dp"
+        android:layout_below="@+id/avgCurrency"
+        android:layout_marginTop="5dp"
         android:text="Kupno:" />
+
+        <TextView
+            android:id="@+id/buyNBP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView"
+            android:text="TextView"
+            android:gravity="center"
+            android:layout_marginLeft="10dp"/>
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView"
-        android:layout_marginTop="31dp"
+        android:layout_below="@+id/buyNBP"
+        android:layout_marginTop="5dp"
         android:text="Sprzedaż:" />
-
-    <TextView
-        android:id="@+id/buyNBP"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/textView2"
-        android:layout_alignEnd="@+id/avgCurrency"
-        android:layout_alignRight="@+id/avgCurrency"
-        android:text="TextView" />
 
     <TextView
         android:id="@+id/sellNBP"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView2"
-        android:layout_alignEnd="@+id/buyNBP"
-        android:layout_alignRight="@+id/buyNBP"
-        android:text="TextView" />
+        android:layout_below="@+id/textView2"
+        android:text="TextView"
+        android:gravity="center"
+        android:layout_marginLeft="10dp"/>
 
+    <Button
+        android:id="@+id/buttonDisplay"
+        android:text="Wyświetl"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/sellNBP"
+        android:background="@color/grey"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    </LinearLayout>
 </RelativeLayout>
