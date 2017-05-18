@@ -13,7 +13,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        >
+        android:weightSum="1">
     <TextView
         android:id="@+id/textViewChooseCurrency"
         android:layout_width="100dp"
@@ -42,10 +42,10 @@
     <ListView
         android:id="@+id/listExchangeOffice"
         android:layout_width="match_parent"
-        android:layout_height="133dp"
+        android:layout_height="107dp"
         android:layout_below="@+id/descryption"
         android:layout_marginTop="15dp"
-        >
+        android:layout_weight="0.29">
     </ListView>
     <Button
         android:id="@+id/buttonDisplay"
