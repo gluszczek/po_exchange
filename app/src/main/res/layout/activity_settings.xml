@@ -32,22 +32,44 @@
     </LinearLayout>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <TextView
+        android:id="@+id/notificationsText"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="20dp"
+        android:textSize="20dp"
+        android:text="Powiadomienia "/>
+
+    <EditText
+        android:id="@+id/notificationsField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="20dp"
+        android:hint="Tak"
+        />
+    </LinearLayout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
-            android:id="@+id/notificationsText"
+            android:id="@+id/secretOption"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_marginTop="20dp"
             android:textSize="20dp"
-            android:text="Powiadomienia "/>
+            android:text="Laski "/>
 
-        <EditText
-            android:id="@+id/notificationsField"
+        <CheckBox
+            android:id="@+id/checkboxSecretOption"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_marginTop="20dp"
             android:textSize="20dp"
             android:hint="Tak"
