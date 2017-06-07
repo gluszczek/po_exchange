@@ -7,17 +7,12 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:fontFamily">Roboto</item>
-        <item name="android:background">#3f3437</item>
-        <item name="android:textColor">#ffffff</item>
+        <!--<item name="android:background">#3f3437</item> -->
+        <item name="android:textColor">#f9f7f7</item>
         <item name="android:buttonStyle">@style/CKButton</item>
+
+        <item name="android:windowBackground">@drawable/adrianafit</item>
     </style>
 
-    <style name="CKButton" parent="android:style/Widget.Button">
-        <item name="android:textSize">19sp</item>
-        <item name="android:layout_margin">0dip</item>
-        <item name="android:background">#464041</item>
-        <item name="android:fontFamily">Roboto</item>
-        <item name="android:textColor">#ffffff</item>
-    </style>
 
 </resources>

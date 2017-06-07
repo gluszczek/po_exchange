@@ -6,25 +6,31 @@
 
     <TextView android:id="@+id/exchangeOfficeName"
         android:layout_width="120dp"
-        android:layout_height="wrap_content"
+        android:layout_height="20dp"
         android:text="Kantor"
-        android:layout_gravity="left"/>
-
+        android:layout_gravity="left"
+        android:background="@color/grey"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="@color/grey">
     <TextView
         android:id="@+id/buyCurrency"
         android:layout_width="70dp"
-        android:layout_height="wrap_content"
+        android:layout_height="20dp"
         android:text="Kupno"
         android:layout_marginLeft="20dp"
-        android:layout_gravity="left"/>
+        android:layout_gravity="left"
+        />
 
     <TextView
         android:id="@+id/sellCurrency"
         android:layout_width="70dp"
-        android:layout_height="wrap_content"
+        android:layout_height="20dp"
         android:text="Sprzedaż"
         android:layout_marginLeft="10dp"
         android:layout_marginBottom="10dp"
-        android:layout_gravity="left" />
-
+        android:layout_gravity="left"
+        />
+    </LinearLayout>
 </LinearLayout>
