@@ -31,6 +31,10 @@ public class OnlineExchangeOffice {
     private double sellValue;
     private double buyValue;
 
+    public OnlineExchangeOffice(Context context){
+        appContext = context;
+    }
+
     public OnlineExchangeOffice(Context context, String webName, String buyRegex, String sellRegex, ArrayList<String> htmls){
         name = webName;
         appContext = context;
@@ -141,5 +145,9 @@ public class OnlineExchangeOffice {
 
     public double getSellValue(){
         return sellValue;
+    }
+
+    public String getHtmlSource() {
+        return htmlSource;
     }
 }
