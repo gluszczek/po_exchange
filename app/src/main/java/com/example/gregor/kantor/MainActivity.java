@@ -3,6 +3,7 @@ package com.example.gregor.kantor;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.media.Image;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,10 +21,16 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "Kantor.java";
     public static final String DATA_PATH = Environment
             .getExternalStorageDirectory().toString() + "/Kantor/";
-    protected Button buttonCompareCantors;
+    protected Button buttonCompareExchangeOffice;
     protected Button buttonCurrencySearch;
     protected Button buttonHistory;
     protected Button buttonSettings;
+
+    protected ImageView iconCompareExchangeOffice;
+    protected ImageView iconCurrencySearch;
+    protected ImageView iconHistory;
+    protected ImageView iconSettings;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,21 +45,31 @@ public class MainActivity extends AppCompatActivity {
         Log.v(TAG, "INTERNET_Permission: " + internetPermission);
         askForPermission();
 
-        buttonCompareCantors = (Button)findViewById(R.id.buttonCompareCantors);
-        buttonCompareCantors.setOnClickListener(buttonCompareCantorsListener);
 
+        iconCompareExchangeOffice = (ImageView) findViewById(R.id.iconCompareExchangeOffice);
+        iconCompareExchangeOffice.setImageResource(R.drawable.exchange_office);
+        buttonCompareExchangeOffice = (Button)findViewById(R.id.buttonCompareExchangeOffice);
+        buttonCompareExchangeOffice.setOnClickListener(buttonCompareExchangeOfficeListener);
+
+        iconCurrencySearch = (ImageView) findViewById(R.id.iconCurrencySearch);
+        iconCurrencySearch.setImageResource(R.drawable.currency_search);
         buttonCurrencySearch = (Button)findViewById(R.id.buttonCurrencySearch);
         buttonCurrencySearch.setOnClickListener(buttonCurrencySearchListener);
 
+        iconHistory = (ImageView) findViewById(R.id.iconHistory);
+        iconHistory.setImageResource(R.drawable.history);
         buttonHistory = (Button)findViewById(R.id.buttonHistory);
         buttonHistory.setOnClickListener(buttonHistoryListener);
 
+        iconSettings = (ImageView) findViewById(R.id.iconSettings);
+        iconSettings.setImageResource(R.drawable.settings);
         buttonSettings = (Button)findViewById(R.id.buttonSettings);
         buttonSettings.setOnClickListener(buttonSettingsListener);
 
+
     }
     // Menu buttons click handling
-    private View.OnClickListener buttonCompareCantorsListener = new View.OnClickListener() {
+    private View.OnClickListener buttonCompareExchangeOfficeListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             Intent cantorsViewIntent = new Intent(v.getContext(), CantorsViewActivity.class);
