@@ -1,7 +1,18 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:fontFamily">Roboto</item>
+        <item name="android:background">#696969</item>
+        <item name="android:textColor">#f9f7f7</item>
+        <item name="android:buttonStyle">@style/CKButton</item>
+
+    </style>
+    <style name="AppTheme.Adriana" parent="Theme.AppCompat.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -13,6 +24,8 @@
 
         <item name="android:windowBackground">@drawable/adrianafit</item>
     </style>
+
+
 
 
 </resources>

@@ -2,6 +2,7 @@ package com.example.gregor.kantor;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.media.Image;
 import android.os.Environment;
@@ -21,6 +22,11 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "Kantor.java";
     public static final String DATA_PATH = Environment
             .getExternalStorageDirectory().toString() + "/Kantor/";
+
+    public static final String PREFS_NAME = "prefs";
+    public SharedPreferences mPrefs;
+    public static boolean theme = false;
+
     protected Button buttonCompareExchangeOffice;
     protected Button buttonCurrencySearch;
     protected Button buttonHistory;
@@ -35,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        setTheme(theme ? R.style.AppTheme_Adriana : R.style.AppTheme);
         setContentView(R.layout.activity_main);
 
         int writePermission = ContextCompat.checkSelfPermission(this,
@@ -68,6 +76,19 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        // getIntent() should always return the most recent
+        setIntent(intent);
+        finish();
+        startActivity(intent);
+    }
+
+
+
+
     // Menu buttons click handling
     private View.OnClickListener buttonCompareExchangeOfficeListener = new View.OnClickListener() {
         @Override
@@ -91,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
             Intent historyViewIntent = new Intent(v.getContext(), HistoryActivity.class);
             startActivity(historyViewIntent);
+
         }
     };
 
