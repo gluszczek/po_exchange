@@ -22,6 +22,7 @@ public class HistoryActivity extends Activity {
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
+            setTheme(MainActivity.theme ? R.style.AppTheme_Adriana : R.style.AppTheme);
             setContentView(R.layout.activity_history);
             list = (ListView) findViewById(R.id.list);
             adapter = new ArrayAdapter<String>(this,

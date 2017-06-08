@@ -28,8 +28,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="10dp"
-        android:popupBackground="@color/black"
-        android:background="@color/black"
+        android:popupBackground="@color/grey"
+        android:background="@color/grey"
         />
     <include
         android:id="@+id/descryption"
@@ -45,7 +45,7 @@
         android:layout_height="107dp"
         android:layout_below="@+id/descryption"
         android:layout_marginTop="15dp"
-        android:layout_weight="0.29">
+        android:layout_weight="0.29">`
     </ListView>
     <Button
         android:id="@+id/buttonDisplay"

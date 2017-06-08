@@ -39,6 +39,7 @@ public class CantorsViewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(MainActivity.theme ? R.style.AppTheme_Adriana : R.style.AppTheme);
         setContentView(R.layout.activity_cantors_view);
         buttonDisplay = (Button) findViewById(R.id.buttonDisplay);
         buttonDisplay.setOnClickListener(buttonDisplayListener);
