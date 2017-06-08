@@ -8,81 +8,62 @@
     >
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/refreshCurrencyText"
-            android:layout_width="150dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_marginTop="20dp"
-            android:text="Aktualizacja co: "
+            android:text="Aktualizuj: "
             android:textSize="20dp" />
 
-         <EditText
-             android:id="@+id/refreshCurrencyField"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_centerHorizontal="true"
-             android:layout_marginTop="20dp"
-             android:hint="5s"
-             android:textSize="20dp" />
+        <Spinner
+            android:id="@+id/spinnerRefreshCurrency"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:textSize="20dp"
+            android:hint="classic"
+            android:layout_weight="0.25" />
     </LinearLayout>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="120dp"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="vertical">
     <TextView
         android:id="@+id/notificationsText"
-        android:layout_width="150dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_marginTop="20dp"
         android:textSize="20dp"
-        android:text="Powiadomienia "/>
+        android:text="Powiadom \no zmianach "/>
 
-    <EditText
-        android:id="@+id/notificationsField"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:textSize="20dp"
-        android:hint="Tak"
-        />
-    </LinearLayout>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:id="@+id/secretOption"
-            android:layout_width="150dp"
+        <Spinner
+            android:id="@+id/spinnerNotifications"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_marginTop="20dp"
-            android:textSize="20dp"
-            android:text="Laski "/>
-
-        <CheckBox
-            android:id="@+id/checkboxSecretOption"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
             android:textSize="20dp"
             android:hint="Tak"
-            />
+            android:layout_weight="0.25" />
     </LinearLayout>
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:weightSum="1">
         <TextView
             android:id="@+id/motiveText"
-            android:layout_width="70dp"
+            android:layout_width="90dp"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_marginTop="20dp"
@@ -91,13 +72,22 @@
 
         <Spinner
             android:id="@+id/spinnerMotive"
-            android:layout_width="50dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
             android:textSize="20dp"
-            android:hint="classic"
+            android:hint="business"
             android:layout_weight="0.25" />
+        <Button
+            android:id="@+id/buttonSaveSettings"
+            android:text="Zapisz"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/grey"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
     </LinearLayout>
 </LinearLayout>
