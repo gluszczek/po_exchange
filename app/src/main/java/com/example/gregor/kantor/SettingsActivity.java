@@ -98,21 +98,6 @@ public class SettingsActivity extends AppCompatActivity {
 
             Intent intent = getIntent();
 
-
-            // Intent for the activity to open when user selects the notification
-            /*
-            Intent upIntent = NavUtils.getParentActivityIntent(this);
-            // Use TaskStackBuilder to build the back stack and get the PendingIntent
-            PendingIntent pendingIntent =
-                    TaskStackBuilder.create(this)
-                            // add all of DetailsActivity's parents to the stack,
-                            // followed by DetailsActivity itself
-                            .addNextIntentWithParentStack(upIntent)
-                            .getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
-            builder.setContentIntent(pendingIntent);
-            */
             finish();
             startActivity(intent);
         }

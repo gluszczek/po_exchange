@@ -29,6 +29,13 @@ public class HistoryActivity extends Activity {
                     android.R.layout.simple_list_item_1, listItems);
             list.setAdapter(adapter);
 
+            // List NBP history
+            for(int i =0; i < MainActivity.historyBufferSize; i++) {
+                if(MainActivity.nbpHistory[i]!="-")
+                    listItems.add(MainActivity.nbpHistory[i]);
+                else break;
+            }
+
             list.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view,
@@ -38,10 +45,11 @@ public class HistoryActivity extends Activity {
                 }
             });
         }
-
+        /*
         public void addItems(View v) {
             listItems.add("Clicked : " + clickCounter++);
             adapter.notifyDataSetChanged();
         }
+        */
     }
 

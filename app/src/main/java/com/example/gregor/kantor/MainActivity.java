@@ -17,6 +17,7 @@ import android.widget.ImageView;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "Kantor.java";
@@ -25,7 +26,10 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String PREFS_NAME = "prefs";
     public SharedPreferences mPrefs;
-    public static boolean theme = false;
+
+    public static boolean theme = false; // AdrianaTheme = true, RegularTheme = false
+    public static int historyBufferSize = 7;
+    public static String[] nbpHistory = Collections.nCopies(historyBufferSize, "-").toArray(new String[historyBufferSize]);
 
     protected Button buttonCompareExchangeOffice;
     protected Button buttonCurrencySearch;

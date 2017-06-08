@@ -50,8 +50,21 @@ public class NBPActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View v) {
+            String currencyChoice = spinnerCurrency.getSelectedItem().toString();
 
-            Currency c = parserXml.find(spinnerCurrency.getSelectedItem().toString());
+            // Save last currency search - see in HistoryActivity
+            for(int i=0; i < MainActivity.historyBufferSize; i++) {
+                if (MainActivity.nbpHistory[i]=="-") {
+                    MainActivity.nbpHistory[i] = currencyChoice;
+                    break;
+                }
+                if (i == MainActivity.historyBufferSize-1){
+                    for(int j=0; j < MainActivity.historyBufferSize; j++) {
+                        MainActivity.nbpHistory[i]="-";
+                    }
+                }
+            }
+            Currency c = parserXml.find(currencyChoice);
             currencyName.setText(c.getCurrencyName());
             scaler.setText(c.getScaler());
             currencyCode.setText(c.getCurrencyCode());
