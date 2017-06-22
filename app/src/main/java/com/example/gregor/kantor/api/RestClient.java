@@ -8,12 +8,16 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * Created by Gregor on 07.06.2017.
+ * Klasa tworzaca obiekt biblioteki RetroFit w celu komuniacji z API
  */
 
 public class RestClient {
     public static final String BASE_URL = "http://kantor-api.azurewebsites.net/";
 
+    /**
+     * Przygotowanie obiektu laczacago sie z API poprzez okereslenie zrodlowego adresu URL, ustawienia konwertera danych na GSON oraz uruchomienie wyswietlanai komunikatow (logow)
+     * @return utworzony obiekt Retrofit do laczenia sie z API
+     */
     public static Retrofit getClient(){
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
