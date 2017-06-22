@@ -17,7 +17,7 @@ import static android.content.ContentValues.TAG;
 import static com.example.gregor.kantor.MainActivity.DATA_PATH;
 
 /**
- * Created by Gregor on 26.04.2017.
+ *Klasa reprezentujaca internetowy kantor.
  */
 
 public class OnlineExchangeOffice {
@@ -43,6 +43,10 @@ public class OnlineExchangeOffice {
         htmlSources = htmls;
     }
 
+    /**
+     * Pobranie kodu zrodlowego w zaleznosci od przekazanej waluty zostaje pobrana inny kod zrodlowy
+     * @param currency waluta dla ktorej pobierany jest kod zrodlowy
+     */
     public void search(String currency){
         switch (currency){
             case "EUR":
@@ -61,6 +65,9 @@ public class OnlineExchangeOffice {
         getHTML();
     }
 
+    /**
+     * Pobranie kodu zrodlowego, ktorego adres okreslony jest w polu klasy o nazwie htmlSource i przypisanie go do stringa htmlCode
+     */
     public void getHTML() {
         Ion.with(appContext)
                 .load(htmlSource)
@@ -76,12 +83,18 @@ public class OnlineExchangeOffice {
                 });
     }
 
+    /**
+     * Zresetowanie wartosci kursow walut oraz kodu zrodlowego
+     */
     public void resetValues(){
         buyValue = -1;
         sellValue = -1;
         htmlCode = "";
     }
 
+    /**
+     * Wyszukiwanie wartosci kupna za pomoca wyrazenia regularnego przechowanego w polu klasy o nazwie regexBuy
+     */
     public void loadBuyValue(){
         if(htmlCode.equals("")){
             buyValue = -1;
@@ -91,6 +104,9 @@ public class OnlineExchangeOffice {
         buyValue = Double.parseDouble(information.replace(",", "."));
     }
 
+    /**
+     * Wyszukiwanie wartosci sprzedazy za pomoca wyrazenia regularnego przechowanego w polu klasy o nazwie regexSell
+     */
     public void loadSellValue(){
         if(htmlCode.equals("")){
             sellValue = -1;
@@ -100,6 +116,11 @@ public class OnlineExchangeOffice {
         sellValue = Double.parseDouble(information.replace(",", "."));
     }
 
+    /**
+     * Przesukiwanie stringa zawierajacego kod zrodlowego przy pomocy wyrazenia regularnego przekazanego jako parametr funkcji
+     * @param regex wyrazenie regularne
+     * @return wartosc kupna/sprzedazy waluty
+     */
     private String getValueByRegex(String regex){
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(htmlCode);
@@ -113,6 +134,10 @@ public class OnlineExchangeOffice {
         return value;
     }
 
+    /**
+     * Zapisanie lancucha znakow do pliku. Sluzylo to do zapisania pobranego kodu zrodlowego do pliku w celach testowych.
+     * @param data
+     */
     private void writeToFile(String data) {
     try {
         File f = new File(DATA_PATH+ name + ".txt");

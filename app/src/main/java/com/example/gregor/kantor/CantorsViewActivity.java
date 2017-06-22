@@ -25,6 +25,9 @@ import java.util.ArrayList;
 
 import static java.lang.Thread.sleep;
 
+/**
+ * Widok, w ktorym wyswietlane sa kursy walut z poszeczgolnych kantorow internetowych.
+ */
 public class CantorsViewActivity extends AppCompatActivity {
 
     private ListView list;
@@ -51,6 +54,9 @@ public class CantorsViewActivity extends AppCompatActivity {
         prepareListView();
     }
 
+    /**
+     * Obsluga przycisku odpowiadajacego za uruchomienie procedury wczytywania kursow walut z kantorow internetowych.
+     */
     private View.OnClickListener buttonDisplayListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -77,6 +83,10 @@ public class CantorsViewActivity extends AppCompatActivity {
         }
     };
 
+    /**
+     * Funkcja okreslajaca zachowanie po zaladowaniu bazy danych.
+     * Wyswietla liste kantorow w listView.
+     */
     private void setProgressHandler() {
         progressHandler = new Handler() {
             @Override
@@ -88,11 +98,17 @@ public class CantorsViewActivity extends AppCompatActivity {
         };
     }
 
+    /**
+     * Funkcja sprawdzajaca czy kursy walut zostaly zadowane.
+     * Wykorzystywana do zakonczenia ladowania w przypadku udanego zaladowania.
+     *
+     * @return true - jesli wszystkie kursy zostaly zaladowane.
+     */
     private boolean isLoaded() {
         for (OnlineExchangeOffice office :
                 offices) {
             Log.e(office.getName() + ": ", "Sell:" + Double.toString(office.getSellValue()) +
-                                            " Buy:" + Double.toString(office.getBuyValue()));
+                    " Buy:" + Double.toString(office.getBuyValue()));
 
             if (office.getBuyValue() == -1 || office.getSellValue() == -1) {
                 return false;
@@ -101,6 +117,9 @@ public class CantorsViewActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Resetowanie wartosci przypisanych do kantorow. Wszystkie dotychczasowo pobrane kursy zostaja wyczyszczone.
+     */
     private void resetValues() {
         Log.e("OFFICES SIZE: ", Integer.toString(offices.size()));
         for (OnlineExchangeOffice office :
@@ -109,6 +128,11 @@ public class CantorsViewActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Funkcja rozpoczynajaca pobieranie kodu zrodlowego strony internetowego kantoru w zaleznosci od podanej waluty
+     *
+     * @param currency waluta dla jakies pobierany jest kod zrodlowy
+     */
     private void downloadExchangesHTML(String currency) {
         for (OnlineExchangeOffice office :
                 offices) {
@@ -116,6 +140,9 @@ public class CantorsViewActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Funkcja rozpoczynajaca przeszukiwanie kodu zrodlowego w celu znalezienia odpowiednich kursow walut.
+     */
     private void searchExchangesValues() {
         for (OnlineExchangeOffice office :
                 offices) {
@@ -124,6 +151,9 @@ public class CantorsViewActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Ustawienie spinnera sluzacego do wybrania waluty, ktora ma zostac znaleziona
+     */
     private void setCurrencySpinner() {
         String array_spinner[] = new String[4];
         array_spinner[0] = "EUR";
@@ -136,11 +166,19 @@ public class CantorsViewActivity extends AppCompatActivity {
         spinnerCurrency.setAdapter(adapter);
     }
 
+    /**
+     * Dodanie nazwy i wartosci kupna i sprzedazy waluty do listView dla podanego kantoru
+     *
+     * @param office kantor, ktorego atrybuty maja zostac dodane
+     */
     private void addExchangeOffice(OnlineExchangeOffice office) {
         listAdapter.add(office.getName(), Double.toString(office.getBuyValue()),
-                                            Double.toString(office.getSellValue()));
+                Double.toString(office.getSellValue()));
     }
 
+    /**
+     * Wyswietlenie kantorow na liscie poprzez dodanie wszystkich kantorow do listView.
+     */
     private void showExchanges() {
         listAdapter.clear();
         for (OnlineExchangeOffice office :
@@ -149,7 +187,11 @@ public class CantorsViewActivity extends AppCompatActivity {
         }
     }
 
-    private void prepareListView(){
+    /**
+     * Konfiguracja widoku listy.
+     * Przygotowanie okna dialogowego sluzacego do przekierowania na strone internetowa kantoru.
+     */
+    private void prepareListView() {
         /* ListView handling */
         list = (ListView) findViewById(R.id.listExchangeOffice);
         listAdapter = new Adapter(this, "", "", "");
@@ -163,11 +205,15 @@ public class CantorsViewActivity extends AppCompatActivity {
         });
     }
 
-    private void goToWebsite(String officeName){
+    /**
+     * Otworzenie strony internetowej kantoru dla konkretnej waluty w przegladarce
+     * @param officeName nazwa kantoru, ktory ma zostac otworzony
+     */
+    private void goToWebsite(String officeName) {
         String targetUrl = "";
         for (OnlineExchangeOffice office :
                 offices) {
-            if (office.getName() == officeName){
+            if (office.getName() == officeName) {
                 targetUrl = office.getHtmlSource();
                 break;
             }
@@ -176,13 +222,17 @@ public class CantorsViewActivity extends AppCompatActivity {
         openBrowser(targetUrl);
     }
 
-    private void openBrowser(String http){
+    /**
+     * Otworzenie przekazanego adresu http w przegladarce
+     * @param http adres, ktory ma zostac otworzony
+     */
+    private void openBrowser(String http) {
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(http));
         startActivity(browserIntent);
     }
 
     DialogInterface.OnClickListener browserDialogClickListener = (dialog, which) -> {
-        switch (which){
+        switch (which) {
             case DialogInterface.BUTTON_POSITIVE:
                 goToWebsite(lastClickedOffice);
                 break;

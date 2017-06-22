@@ -7,7 +7,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 
 /**
- * Created by Gregor on 07.06.2017.
+ * Klasa definiujaca konkretne zapytania do API w celu pobrania danych z bazy danych
  */
 
 public interface MyWebService {
